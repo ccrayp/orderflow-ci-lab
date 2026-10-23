@@ -23,6 +23,13 @@ def retry_delays(attempts: int, base_seconds: int = 2) -> list[int]:
 
 def notify_followers(followers: list[str], reference: str):
     callbacks = []
+
     for follower in followers:
-        callbacks.append(lambda: {'recipient': follower, 'reference': reference})
+        callbacks.append(
+            lambda follower=follower: {
+                "recipient": follower,
+                "reference": reference,
+            }
+        )
+
     return callbacks

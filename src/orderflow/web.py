@@ -55,7 +55,7 @@ class Handler(BaseHTTPRequestHandler):
             LOGGER.info("Quote requested for %s items", len(payload.get("items", [])))
             total = calculate_total(payload["items"], payload.get("coupon", ""), bool(payload.get("loyalty", False)), bool(payload.get("express", False)), payload.get("region", "local"))
             return self.send_json({"total": total})
-        except (ValueError, KeyError, TypeError, json.JSONDecodeError):
+        except (ValueError, KeyError, TypeError):
             return self.send_json({"error": "Invalid input"}, 400)
 
 
